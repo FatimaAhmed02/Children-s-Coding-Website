@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>EasyCodes</title>
+    <link rel="icon" type="image/x-icon" href="favicon.ico">
+
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<!-- Header -->
+<header>
+    <div class="logo">EasyCodes</div>
+    <div class="hamburger" onclick="toggleMenu()">☰</div>
+    <nav>
+        <ul class="nav-links">
+            <li><a href="#hero">Home</a></li>
+            <li><a href="#lessons">Lessons</a></li>
+            <li><a href="#why-us">Why Us?</a></li>
+            <li><a href="#about">About</a></li>
+            <li><a href="#contact">Contact</a></li>
+        </ul>
+    </nav>
+    <div class="auth-buttons">
+        <button class="auth-btn" onclick="showPopup('login')">Login</button>
+        <button class="auth-btn register" onclick="showPopup('register')">Register</button>
+    </div>
+    <button class="logout-btn" onclick="logout()" style="display: none;">Logout</button>
+</header>
+
+<!-- Login/Register Popup -->
+<div id="authPopup" class="popup">
+    <span class="close" onclick="closePopup()">&times;</span>
+    <h2 id="popupTitle">Login</h2>
+
+    <!-- Login Form -->
+    <form id="loginForm">
+        <div class="input-group">
+            <label>Username</label>
+            <input type="text" id="loginUsername" placeholder="Enter username">
+        </div>
+        <div class="input-group">
+            <label>Password</label>
+            <input type="password" id="loginPassword" placeholder="Enter password">
+        </div>
+        <button type="button" class="auth-btn" id="loginButton" onclick="login()">Login</button>
+
+        <p class="toggle-auth">New user? <a href="#" onclick="showPopup('register')">Register here</a></p>
+    </form>
+
+    <!-- Register Form -->
+    <form id="registerForm" style="display: none;">
+        <div class="input-group">
+            <label>Email</label>
+            <input type="email" id="registerEmail" placeholder="Enter email">
+        </div>
+        <div class="input-group">
+            <label>Username</label>
+            <input type="text" id="registerUsername" placeholder="Choose a username">
+        </div>
+        <div class="input-group">
+            <label>Password</label>
+            <input type="password" id="registerPassword" placeholder="Create a password">
+        </div>
+        <button type="button" class="auth-btn" onclick="register()">Register</button>
+        <p class="toggle-auth">Already have an account? <a href="#" onclick="showPopup('login')">Login here</a></p>
+    </form>
+</div>
+</header>
+
+<!-- Hero Section -->
+<section id="hero">
+    <h1>Empowering Kids to Code & Explore!</h1>
+    <p>Fun, interactive, and beginner-friendly coding lessons.</p>
+    <button onclick="location.href='#lessons'">Start Learning</button>
+</section>
+
+<!-- Lessons Section -->
+<section id="lessons">
+    <h2>Explore Our Lessons</h2>
+    <div class="lesson-grid">
+        <div class="lesson-card lesson1">
+            <h3>Lesson 1: Building a Simple Webpage</h3>
+            <p>Learn the basics of HTML by creating your first webpage!</p>
+            <a href="lesson1.html" class="start-lesson">Start Lesson</a>
+        </div>
+        <div class="lesson-card lesson2">
+            <h3>Lesson 2: Introduction to CSS</h3>
+            <p>Learn how to add color, style, and layout to your webpage with CSS!</p>
+            <a href="lesson2.html" class="start-lesson">Start Lesson</a>
+        </div>
+        <div class="lesson-card lesson3">
+            <h3>Lesson 3: Buttons and Hover Effects</h3>
+            <p>Enhance your site with buttons and fun hover effects using CSS!</p>
+            <a href="lesson3.html" class="start-lesson">Start Lesson</a>
+        </div>
+        <div class="lesson-card lesson4">
+            <h3>Lesson 4: Designing a Mini Profile Page</h3>
+            <p>Build a simple profile page with personalized information and design.</p>
+            <a href="lesson4.html" class="start-lesson">Start Lesson</a>
+        </div>
+    </div>
+</section>
+
+<!-- Lesson Progress Tracker -->
+<section id="lesson-progress">
+    <h2>📚 Your Lesson Progress</h2>
+    
+    <p>See which lessons you've completed! ✔️</p>
+
+    <ul class="lesson-tracker">
+        <li>Lesson 1: <span id="lesson1Status">✖️</span></li>
+        <li>Lesson 2: <span id="lesson2Status">✖️</span></li>
+        <li>Lesson 3: <span id="lesson3Status">✖️</span></li>
+        <li>Lesson 4: <span id="lesson4Status">✖️</span></li>
+    </ul>
+
+    <!-- Progress Bar -->
+    <div id="progressContainer">
+        <div id="progressBar"></div>
+    </div>
+    
+</section>
+
+
+<!-- Merit & Badge Section -->
+<section id="merit-badge-section">
+    <h2>🏆 Your Achievements</h2>
+    <p><strong>Merit Points:</strong> <span id="meritPoints">0</span></p>
+    <div id="badgeDisplay">
+        <h3>🎖 Badges Earned:</h3>
+        <div class="badge-container" id="badgeContainer">
+            <p>No badges earned yet.</p>
+        </div>
+    </div>
+    <button onclick="resetProgress()" class="reset-btn">Reset Progress 🔄</button>
+
+</section>
+
+
+<!-- Why Us Section -->
+<section id="why-us">
+    <h2>Why Choose Us?</h2>
+    <div class="why-us-grid">
+        <div class="why-us-card">
+            <h3>Fun & Interactive</h3>
+            <p>Learn coding through exciting games and challenges!</p>
+        </div>
+        <div class="why-us-card">
+            <h3>Kid-Friendly</h3>
+            <p>Simple, step-by-step lessons designed for young learners.</p>
+        </div>
+        <div class="why-us-card">
+            <h3>Hands-On Practice</h3>
+            <p>Build real projects with interactive coding exercises.</p>
+        </div>
+        <div class="why-us-card">
+            <h3>Safe & Supportive</h3>
+            <p>A positive space for kids to explore and create.</p>
+        </div>
+    </div>
+</section>
+
+<!-- About Us Section -->
+<section id="about">
+    <div class="about-content">
+        <h2>About Us</h2>
+        <p>Our mission is to inspire and empower the next generation of tech creators by making coding an exciting, engaging, and accessible experience for all children. We believe that learning to code should be fun, which is why we've designed a platform that transforms complex programming concepts into interactive games, step-by-step lessons, and hands-on challenges.  Through our carefully crafted curriculum, kids will build real projects, solve puzzles, and earn rewards as they progress—helping them develop problem-solving skills, creativity, and confidence in their coding abilities. Whether they are absolute beginners or curious learners, we provide a safe, supportive, and playful environment where they can explore, experiment, and turn their ideas into reality! 🚀✨</p>
+        <p>Join us on this exciting journey to learn the magic of coding!</p>
+    </div>
+</section>
+
+<!-- Footer -->
+<footer>
+    <p>&copy; 2025 EasyCodes | <a href="#contact">Contact Us</a></p>
+    <div id="contact">
+        <p>Email: <a href="mailto:easycodes@gmail.com">info@easycodes.com</a> | 
+        Phone: <a href="tel:+254725277198">+254725277188</a> | 
+        Address: 00603 South C, Nairobi,Kenya</p>
+    </div>
+</footer>
+
+<script src="script.js" defer></script>
+
+</body>
+</html>

@@ -1,0 +1,255 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lesson 4 Quiz: Profile Page</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Fredoka+One&display=swap');
+
+        body {
+            font-family: 'Fredoka One', sans-serif;
+            background: linear-gradient(135deg, #84fab0, #8fd3f4);
+            text-align: center;
+            padding: 20px;
+        }
+
+        .quiz-container {
+            max-width: 800px;
+            margin: auto;
+            background: white;
+            padding: 20px;
+            border-radius: 15px;
+            box-shadow: 0px 5px 15px rgba(0, 0, 0, 0.2);
+            animation: fadeIn 1s ease-in-out;
+        }
+
+        h1 {
+            color: #007bff;
+            font-size: 30px;
+        }
+
+        .question {
+            font-size: 20px;
+            font-weight: bold;
+            margin: 15px auto;
+            text-align: center;
+            max-width: 90%;
+        }
+
+        .options {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .options label {
+            background: #007bff;
+            color: white;
+            padding: 10px;
+            margin: 5px;
+            border-radius: 5px;
+            cursor: pointer;
+            display: block;
+            width: 70%;
+            text-align: center;
+            transition: transform 0.2s, background 0.3s;
+        }
+
+        .options label:hover {
+            background: #0056b3;
+            transform: scale(1.05);
+        }
+
+        .submit-btn {
+            background: #28a745;
+            color: white;
+            padding: 15px;
+            border: none;
+            border-radius: 10px;
+            cursor: pointer;
+            font-size: 20px;
+            transition: transform 0.2s, background 0.3s;
+            margin-top: 15px;
+        }
+
+        .submit-btn:hover {
+            background: #1e7e34;
+            transform: scale(1.1);
+        }
+
+        .hidden { display: none; }
+
+        .result-container {
+            margin-top: 20px;
+            font-size: 22px;
+            font-weight: bold;
+        }
+
+        .badge-message {
+            font-size: 20px;
+            color: #008000;
+            font-weight: bold;
+            margin-top: 15px;
+            display: none;
+            animation: bounce 1s infinite;
+        }
+
+        @keyframes bounce {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-10px); }
+        }
+
+        .next-btn {
+            background-color: #007bff;
+            color: white;
+            padding: 15px 20px;
+            border: none;
+            border-radius: 10px;
+            cursor: pointer;
+            font-size: 20px;
+            transition: transform 0.2s, background 0.3s;
+            margin-top: 15px;
+            display: none;
+        }
+
+        .next-btn:hover {
+            background: #0056b3;
+            transform: scale(1.1);
+        }
+
+    </style>
+</head>
+<body>
+
+<div class="quiz-container">
+    <h1>📋 Lesson 4 Quiz: Profile Page 📋</h1>
+    <p>Test your knowledge about creating a profile page! 🏆</p>
+
+    <form id="quizForm">
+        <div class="question">1. What does the <code>&lt;h1&gt;</code> tag do?</div>
+        <div class="options">
+            <label><input type="radio" name="q1" value="a"> Makes text bold</label>
+            <label><input type="radio" name="q1" value="b"> Creates a large heading</label>
+            <label><input type="radio" name="q1" value="c"> Inserts an image</label>
+        </div>
+
+        <div class="question">2. What tag is used to display an image?</div>
+        <div class="options">
+            <label><input type="radio" name="q2" value="a"> &lt;img&gt;</label>
+            <label><input type="radio" name="q2" value="b"> &lt;button&gt;</label>
+            <label><input type="radio" name="q2" value="c"> &lt;h1&gt;</label>
+        </div>
+
+        <div class="question">3. What property changes the background color of an element?</div>
+        <div class="options">
+            <label><input type="radio" name="q3" value="a"> text-align</label>
+            <label><input type="radio" name="q3" value="b"> background-color</label>
+            <label><input type="radio" name="q3" value="c"> font-size</label>
+        </div>
+
+        <div class="question">4. How do you center text in CSS?</div>
+        <div class="options">
+            <label><input type="radio" name="q4" value="a"> text-align: center;</label>
+            <label><input type="radio" name="q4" value="b"> background-color: center;</label>
+            <label><input type="radio" name="q4" value="c"> margin: center;</label>
+        </div>
+
+        <div class="question">5. What CSS property is used to make a button larger?</div>
+        <div class="options">
+            <label><input type="radio" name="q5" value="a"> padding</label>
+            <label><input type="radio" name="q5" value="b"> border</label>
+            <label><input type="radio" name="q5" value="c"> width</label>
+        </div>
+
+        <div class="question">6. Which CSS property changes the text color?</div>
+        <div class="options">
+            <label><input type="radio" name="q6" value="a"> text-size</label>
+            <label><input type="radio" name="q6" value="b"> color</label>
+            <label><input type="radio" name="q6" value="c"> font-weight</label>
+        </div>
+
+        <div class="question">7. What does <code>:hover</code> do?</div>
+        <div class="options">
+            <label><input type="radio" name="q7" value="a"> Adds an image</label>
+            <label><input type="radio" name="q7" value="b"> Changes styles when hovering</label>
+            <label><input type="radio" name="q7" value="c"> Makes text bold</label>
+        </div>
+
+        <div class="question">8. What unit is used for font sizes?</div>
+        <div class="options">
+            <label><input type="radio" name="q8" value="a"> px (pixels)</label>
+            <label><input type="radio" name="q8" value="b"> kg (kilograms)</label>
+            <label><input type="radio" name="q8" value="c"> cm (centimeters)</label>
+        </div>
+
+        <button type="button" class="submit-btn" onclick="checkAnswers()">Submit Answers</button>
+    </form>
+
+    <div class="result-container hidden" id="result"></div>
+    <div class="badge-message" id="badgeMessage"></div>
+
+</div>
+
+<script>
+    async function checkAnswers() {
+        let correctAnswers = {
+            q1: "b", q2: "a", q3: "b", q4: "a",
+            q5: "a", q6: "b", q7: "b", q8: "a"
+        };
+    
+        let score = 0;
+        let totalQuestions = Object.keys(correctAnswers).length;
+    
+        for (let key in correctAnswers) {
+            let selected = document.querySelector(`input[name="${key}"]:checked`);
+            if (selected && selected.value === correctAnswers[key]) {
+                score++;
+            }
+        }
+    
+        // Show result message
+        let resultText = `You got ${score} out of ${totalQuestions} correct!`;
+        document.getElementById("result").innerText = resultText;
+        document.getElementById("result").classList.remove("hidden");
+    
+        if (score >= 7) {  
+       
+            // Update backend for merit points and badge
+            await updateProgress(1, "Profile Page Master");
+    
+            // Display earned badge message
+            let badgeMessage = document.getElementById("badgeMessage");
+            badgeMessage.innerHTML = `🎖️ Congratulations! You earned the 'Profile Page Master' badge!`;
+            badgeMessage.style.display = "block";
+            badgeMessage.classList.add("bounce");
+        } else {
+            document.getElementById("badgeMessage").style.display = "none";
+        }
+    }
+    
+    // 🌟 Send progress update to backend
+    async function updateProgress(meritPoints, badge) {
+        let username = localStorage.getItem("username");
+        if (!username) return;
+    
+        try {
+            let response = await fetch("http://localhost:5000/api/users/update-progress", {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify({ username, meritPoints, badge })
+            });
+    
+            let data = await response.json();
+            console.log("✅ Progress updated:", data);
+        } catch (error) {
+            console.error("❌ Error updating progress:", error);
+        }
+    }
+    
+    </script>
+    
+
+</body>
+</html>

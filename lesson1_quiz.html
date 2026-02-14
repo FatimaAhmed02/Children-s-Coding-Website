@@ -1,0 +1,242 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lesson 1 Quiz: HTML Basics</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Fredoka+One&display=swap');
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Fredoka One', sans-serif;
+            background: linear-gradient(-45deg, #ff9a9e, #fad0c4, #fbc2eb, #a18cd1);
+            background-size: 400% 400%;
+            animation: gradientBG 8s ease infinite;
+            text-align: center;
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        @keyframes gradientBG {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
+        .quiz-container {
+            width: 90%;
+            max-width: 800px;
+            height: auto;
+            background: white;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            padding: 30px;
+            border-radius: 20px;
+            box-shadow: 0px 8px 16px rgba(0, 0, 0, 0.2);
+            animation: fadeIn 1s ease-in-out;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: scale(0.9); }
+            to { opacity: 1; transform: scale(1); }
+        }
+
+        h1 {
+            color: #ff4500;
+            font-size: 34px;
+            margin-bottom: 20px;
+        }
+
+        .question {
+            font-size: 22px;
+            font-weight: bold;
+            margin-bottom: 20px;
+            color: #333;
+        }
+
+        .options {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .option {
+            background: #ff6347;
+            padding: 12px 20px;
+            border: none;
+            border-radius: 12px;
+            cursor: pointer;
+            font-size: 18px;
+            width: 80%;
+            max-width: 350px;
+            transition: all 0.3s ease-in-out;
+            color: white;
+            font-weight: bold;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+        }
+
+        .option:hover {
+            background: #ff4500;
+            transform: scale(1.1);
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3);
+        }
+
+        .result {
+            font-size: 24px;
+            margin-top: 20px;
+            font-weight: bold;
+            color: #444;
+        }
+
+        .cheer {
+            display: none;
+            font-size: 30px;
+            color: gold;
+            animation: bounce 1s infinite;
+        }
+
+        @keyframes bounce {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-10px); }
+        }
+
+        .next-btn {
+            display: none;
+            background-color: #ff4500;
+            color: white;
+            padding: 15px 20px;
+            border: none;
+            border-radius: 12px;
+            cursor: pointer;
+            font-size: 20px;
+            transition: transform 0.2s, background 0.3s;
+            margin-top: 20px;
+            font-weight: bold;
+        }
+
+        .next-btn:hover {
+            background: #e03e00;
+            transform: scale(1.1);
+        }
+
+    </style>
+</head>
+<body>
+
+<div class="quiz-container">
+    <h1>📝 HTML Basics Quiz</h1>
+    
+    <div id="quiz">
+        <div class="question" id="question">Loading question...</div>
+        <div class="options" id="options"></div>
+    </div>
+
+    <button class="next-btn" id="nextLesson" onclick="nextLesson()">Next Lesson ➡️</button>
+
+    <div class="result" id="result"></div>
+    <div class="cheer" id="cheer">🎉 Great job! You earned the HTML Master badge! 🎉</div>
+</div>
+
+<script>
+const questions = [
+    { question: "What does HTML stand for?", options: ["Hyper Text Markup Language", "High Tech Machine Learning", "Home Tool Markup Language"], answer: 0 },
+    { question: "Which tag is used for a paragraph?", options: ["<h1>", "<p>", "<div>"], answer: 1 },
+    { question: "Which tag is used for a hyperlink?", options: ["<a>", "<link>", "<href>"], answer: 0 },
+    { question: "Which tag is used to display an image?", options: ["<img>", "<picture>", "<image>"], answer: 0 },
+    { question: "What is the correct tag for an unordered list?", options: ["<ol>", "<ul>", "<list>"], answer: 1 },
+    { question: "Which tag is used to group elements together?", options: ["<section>", "<group>", "<div>"], answer: 2 },
+    { question: "What does the <title> tag do?", options: ["Displays a heading", "Sets the webpage title", "Adds a background color"], answer: 1 },
+    { question: "Which tag creates the largest heading?", options: ["<h6>", "<h1>", "<h3>"], answer: 1 },
+    { question: "Which attribute is used to add an image source?", options: ["src", "href", "alt"], answer: 0 },
+    { question: "Which tag is used for ordered lists?", options: ["<ol>", "<ul>", "<list>"], answer: 0 }
+];
+
+let currentQuestion = 0;
+let score = 0;
+//load a qn
+function loadQuestion() {
+    document.getElementById("question").textContent = questions[currentQuestion].question; //upadtes the text content in html with the current question from the questions array
+    const optionsContainer = document.getElementById("options");
+    optionsContainer.innerHTML = "";
+
+    questions[currentQuestion].options.forEach((option, index) => {
+        const button = document.createElement("button");
+        button.classList.add("option");
+        button.textContent = option; //setting the button's text to display the answer choice
+        button.onclick = () => checkAnswer(index); //passes the selected options index
+        optionsContainer.appendChild(button);
+    });
+}
+//check answer and move to next qn
+function checkAnswer(selected) {
+    if (selected === questions[currentQuestion].answer) {
+        score++;
+    }
+    currentQuestion++;
+
+    if (currentQuestion < questions.length) {
+        loadQuestion();
+    } else {
+        showResult();
+    }
+}
+//show quiz result
+async function showResult() {
+    document.getElementById("quiz").style.display = "none";
+    const resultText = `You got ${score}/10 correct!`;
+    document.getElementById("result").textContent = resultText;
+
+    if (score >= 7) { 
+        document.getElementById("cheer").style.display = "block";
+        document.getElementById("nextLesson").style.display = "inline-block";
+
+        
+        await updateUserProgress(1, "HTML Master");
+    }
+}
+
+//send merit points and badge to the backend
+async function updateUserProgress(earnedMerit, newBadge) {
+    let username = localStorage.getItem("username");
+    if (!username) return;
+
+    try {
+        let response = await fetch("http://localhost:5000/api/users/update-progress", {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({ username, meritPoints: earnedMerit, badge: newBadge })
+        });
+
+        let data = await response.json();
+        if (response.ok) {
+            showNotification("🎉 Progress Updated!", "success");
+        } else {
+            showNotification("⚠ Error updating progress!", "error");
+        }
+    } catch (error) {
+        console.error("Error updating progress:", error);
+    }
+}
+
+function nextLesson() {
+    window.location.href = "lesson2.html";
+}
+
+
+loadQuestion();
+
+</script>
+
+</body>
+</html>

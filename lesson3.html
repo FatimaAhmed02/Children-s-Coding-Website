@@ -1,0 +1,264 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lesson 3: Creating Buttons & Hover Effects</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Fredoka+One&display=swap');
+
+        body {
+            font-family: 'Fredoka One', sans-serif;
+            background: linear-gradient(135deg, #84fab0, #8fd3f4);
+            text-align: center;
+            padding: 20px;
+        }
+        
+        .lesson-container {
+            max-width: 800px;
+            margin: auto;
+            background: white;
+            padding: 20px;
+            border-radius: 15px;
+            box-shadow: 0px 5px 15px rgba(0, 0, 0, 0.2);
+            animation: fadeIn 1s ease-in-out;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(-20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        h1 {
+            color: #007acc;
+            font-size: 30px;
+        }
+
+        h2 {
+            color: #0066cc;
+        }
+
+        p {
+            font-size: 18px;
+            color: #444;
+        }
+
+        .code-box {
+            background: #caa9ff;
+            padding: 15px;
+            border-radius: 8px;
+            font-family: "Courier New", monospace;
+            white-space: pre-wrap;
+            text-align: left;
+            margin-top: 10px;
+            border-left: 5px solid #007acc;
+        }
+
+        .highlight {
+            color: #007acc;
+            font-weight: bold;
+        }
+
+        .emoji {
+            font-size: 24px;
+        }
+
+        .next-btn {
+            background-color: #007acc;
+            color: white;
+            padding: 15px 20px;
+            border: none;
+            border-radius: 10px;
+            cursor: pointer;
+            font-size: 20px;
+            transition: transform 0.2s, background 0.3s;
+        }
+
+        .next-btn:hover {
+            background: #005fa3;
+            transform: scale(1.1);
+        }
+        
+        .bounce {
+            animation: bounce 1s infinite;
+        }
+
+        @keyframes bounce {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-10px); }
+        }
+
+        /* Drag and Drop Styles */
+        .drag-container {
+            margin-top: 20px;
+            padding: 10px;
+            border: 2px dashed #007acc;
+            border-radius: 10px;
+            min-height: 80px;
+            background: #f1f1f1;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-wrap: wrap;
+        }
+
+        .css-style {
+            display: inline-block;
+            padding: 10px;
+            margin: 5px;
+            background: #007acc;
+            color: white;
+            border-radius: 5px;
+            cursor: grab;
+        }
+
+        #unstyledButton {
+            margin-top: 20px;
+            padding: 10px 20px;
+            border: 2px solid black;
+            background: white;
+            cursor: pointer;
+        }
+
+        .check-answer {
+            margin-top: 20px;
+            background: #ff9800;
+            color: white;
+            padding: 12px 20px;
+            border: none;
+            border-radius: 10px;
+            font-size: 18px;
+            cursor: pointer;
+            transition: transform 0.2s, background 0.3s;
+        }
+
+        .check-answer:hover {
+            background: #e08a00;
+            transform: scale(1.1);
+        }
+
+        #resultMessage {
+            font-size: 18px;
+            font-weight: bold;
+            margin-top: 15px;
+        } 
+        #takeQuizBtn {
+             display: block;
+             margin: 20px auto; /* Centers the button */
+            text-align: center;
+        }
+
+
+        
+    </style>
+</head>
+<body>
+
+<div class="lesson-container">
+    <h1 class="emoji">✨ Let's Learn Buttons & Hover Effects! ✨</h1>
+    <p>Buttons are an important part of a webpage! Let’s learn how to style them.</p>
+
+    <h2>📺 Watch & Learn: Creating Buttons</h2>
+    <iframe width="560" height="315" src="https://www.youtube.com/embed/_2wARy-oevQ?si=txBhAS1peMaHbIq0" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+
+    <h2>1. Creating a Button</h2>
+    <p>We create buttons using the <code class="highlight">&lt;button&gt;</code> tag.</p>
+    <div class="code-box">
+        &lt;button&gt;Click Me!&lt;/button&gt;
+    </div>
+
+    <h2>2. Adding Styles</h2>
+    <p>We use CSS to change the **color**, **size**, and **shape** of buttons.</p>
+    <div class="code-box">
+        button {
+            background-color: blue;
+            color: white;
+            padding: 10px 20px;
+            border-radius: 8px;
+        }
+    </div>
+
+    <h2>3. Adding a Hover Effect</h2>
+    <p>Hover effects make buttons change when the mouse moves over them.</p>
+    <div class="code-box">
+        button:hover {
+            background-color: red;
+            transform: scale(1.1);
+        }
+    </div>
+
+    <h2>🎯 Mini Mission: Style the Button!</h2>
+    <p>Drag the correct styles into the box below to style the button.</p>
+
+    <div class="drag-container" id="dropZone">
+        <p>Drop CSS styles here</p>
+    </div>
+
+    <div>
+        <span class="css-style" data-style="color: white;" draggable="true">color: white;</span>
+        <span class="css-style" data-style="background-color: blue;" draggable="true">background-color: blue;</span>
+        <span class="css-style" data-style="padding: 10px 20px;" draggable="true">padding: 10px 20px;</span>
+        <span class="css-style" data-style="border-radius: 8px;" draggable="true">border-radius: 8px;</span>
+    </div>
+
+    <button id="unstyledButton">Click Me!</button>
+
+    <button id="checkAnswerBtn" class="check-answer">Check Answer</button>
+    <p id="resultMessage"></p>
+
+    <button id="takeQuizBtn" class="next-btn bounce" style="display: none;" onclick="startQuiz()">Take the Quiz! 🎉</button>
+</div>
+
+<script>
+    // Drag and Drop Functionality
+    const styles = document.querySelectorAll('.css-style');
+    const dropZone = document.getElementById('dropZone');
+    const button = document.getElementById('unstyledButton');
+    const checkAnswerBtn = document.getElementById('checkAnswerBtn');
+    const resultMessage = document.getElementById('resultMessage');
+    const takeQuizBtn = document.getElementById('takeQuizBtn');
+
+    let appliedStyles = [];
+
+    styles.forEach(style => {
+        style.addEventListener('dragstart', (event) => {
+            event.dataTransfer.setData('text/plain', event.target.getAttribute('data-style'));
+        });
+    });
+
+    dropZone.addEventListener('dragover', (event) => {
+        event.preventDefault();
+    });
+
+    dropZone.addEventListener('drop', (event) => {
+        event.preventDefault();
+        const styleRule = event.dataTransfer.getData('text/plain');
+
+        if (!appliedStyles.includes(styleRule)) {
+            appliedStyles.push(styleRule);
+            button.style.cssText += styleRule;
+
+            const newStyle = document.createElement('p');
+            newStyle.textContent = styleRule;
+            dropZone.appendChild(newStyle);
+        }
+    });
+
+    checkAnswerBtn.addEventListener('click', () => {
+        if (appliedStyles.length === 4) {
+            resultMessage.textContent = "✅ Correct! You've styled the button!";
+            resultMessage.style.color = "green";
+            takeQuizBtn.style.display = "block";
+        } else {
+            resultMessage.textContent = "❌ Try Again!";
+            resultMessage.style.color = "red";
+        }
+    });
+
+    function startQuiz() {
+        window.location.href = "lesson3_quiz.html";
+    }
+</script>
+
+</body>
+</html>

@@ -1,0 +1,280 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lesson 1: HTML Basics</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Fredoka+One&display=swap');
+
+        body {
+            font-family: 'Fredoka One', sans-serif;
+            background: linear-gradient(135deg, #ff9a9e, #fad0c4);
+            text-align: center;
+            padding: 20px;
+        }
+        
+        .lesson-container {
+            max-width: 800px;
+            margin: auto;
+            background: white;
+            padding: 20px;
+            border-radius: 15px;
+            box-shadow: 0px 5px 15px rgba(0, 0, 0, 0.2);
+            animation: fadeIn 1s ease-in-out;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(-20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        h1 {
+            color: #ff4500;
+            font-size: 30px;
+        }
+
+        h2 {
+            color: #ff6347;
+        }
+
+        p {
+            font-size: 18px;
+            color: #444;
+        }
+
+        .code-box {
+            background:#caa9ff;
+            padding: 15px;
+            border-radius: 8px;
+            font-family: "Courier New", monospace;
+            white-space: pre-wrap;
+            text-align: left;
+            margin-top: 10px;
+            border-left: 5px solid #ff4500;
+        }
+
+        .highlight {
+            color: #ff4500;
+            font-weight: bold;
+        }
+
+        .next-btn, .quiz-btn, .check-answer-btn {
+            background-color: #ff4500;
+            color: white;
+            padding: 15px 20px;
+            border: none;
+            border-radius: 10px;
+            cursor: pointer;
+            font-size: 20px;
+            transition: transform 0.2s, background 0.3s;
+            margin-top: 10px;
+        }
+
+        .next-btn:hover, .quiz-btn:hover, .check-answer-btn:hover {
+            background: #e03e00;
+            transform: scale(1.1);
+        }
+        
+        .bounce {
+            animation: bounce 1s infinite;
+        }
+
+        @keyframes bounce {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-10px); }
+        }
+
+        /* Mini Mission Styles */
+        .mini-mission-container {
+            background: #fff4e6;
+            padding: 20px;
+            border-radius: 10px;
+            margin-top: 20px;
+            box-shadow: 0px 5px 10px rgba(0, 0, 0, 0.2);
+        }
+
+        .draggable {
+            display: inline-block;
+            padding: 10px;
+            margin: 10px;
+            background-color: #ff6347;
+            color: white;
+            border-radius: 5px;
+            cursor: grab;
+        }
+
+        .drop-zone {
+            width: 90%;
+            min-height: 100px;
+            background: #f4f4f4;
+            padding: 10px;
+            border: 2px dashed #ff4500;
+            border-radius: 10px;
+            margin: 20px auto;
+        }
+
+        .message {
+            font-size: 20px;
+            margin-top: 10px;
+        }
+
+    </style>
+</head>
+<body>
+
+    <div class="lesson-container">
+        <h1 class="emoji">🔥 Let's Learn HTML! 🔥</h1>
+        <p>HTML is the <b>building block</b> of websites! Let’s explore its most important tags:</p>
+    
+        <h2>1. The <code class="highlight">&lt;html&gt;</code> Tag 🌐 </h2>
+        <p>This tag tells the browser that everything inside is an HTML document.</p>
+        <div class="code-box">
+            &lt;html&gt; <br>
+            &nbsp;&nbsp;&lt;!-- Everything inside here is HTML! --&gt;<br>
+            &lt;/html&gt;
+        </div>
+    
+        <h2>2. The <code class="highlight">&lt;head&gt;</code> & <code class="highlight">&lt;title&gt;</code> Tags 🧠</h2>
+        <p>The <code class="highlight">&lt;head&gt;</code> contains hidden <b>info</b> like the page title.</p>
+        <div class="code-box">
+            &lt;head&gt;<br>
+            &nbsp;&nbsp;&lt;title&gt;My First Webpage&lt;/title&gt;<br>
+            &lt;/head&gt;
+        </div>
+    
+        <h2>3. The <code class="highlight">&lt;body&gt;</code> Tag 🏗️ </h2>
+        <p>This is where all the fun happens! Everything visible goes inside.</p>
+        <div class="code-box">
+            &lt;body&gt;<br>
+            &nbsp;&nbsp;&lt;h1&gt;Welcome to My Page!&lt;/h1&gt;<br>
+            &lt;/body&gt;
+        </div>
+    
+        <h2>4. Headings: <code class="highlight">&lt;h1&gt; to &lt;h6&gt;</code> 📝</h2>
+        <p>Headings define the <b>title sizes</b>. <code>&lt;h1&gt;</code> is the <b>biggest</b>, <code>&lt;h6&gt;</code> is the <b>smallest</b>.</p>
+        <div class="code-box">
+            &lt;h1&gt;Big Title&lt;/h1&gt;<br>
+            &lt;h3&gt;Medium Title&lt;/h3&gt;<br>
+            &lt;h6&gt;Smallest Title&lt;/h6&gt;
+        </div>
+    
+        <h2>5. The <code class="highlight">&lt;p&gt;</code> Tag ✍️</h2>
+        <p>This tag adds <b>paragraphs</b> of text.</p>
+        <div class="code-box">
+            &lt;p&gt;This is a paragraph!&lt;/p&gt;
+        </div>
+    
+        <h2>6. The <code class="highlight">&lt;a&gt;</code> (Link) Tag 🔗</h2>
+        <p>Want to <b>link</b> to another page? Use <code>&lt;a&gt;</code>!</p>
+        <div class="code-box">
+            &lt;a href="https://www.google.com"&gt;Click to visit Google!&lt;/a&gt;
+        </div>
+    
+        <h2>7. The <code class="highlight">&lt;img&gt;</code> (Image) Tag 🖼️</h2>
+        <p>Show images on your page!</p>
+        <div class="code-box">
+            &lt;img src="https://www.example.com/image.jpg" alt="A cool image"&gt;
+        </div>
+    
+        <h2>8. The <code class="highlight">&lt;ul&gt;</code> & <code class="highlight">&lt;ol&gt;</code> (Lists) Tags 📜</h2>
+        <p><b>Unordered (bullet points)</b> & <b>Ordered (numbered)</b> lists.</p>
+        <div class="code-box">
+            &lt;ul&gt; <br>
+            &nbsp;&nbsp;&lt;li&gt;Apples&lt;/li&gt; <br>
+            &nbsp;&nbsp;&lt;li&gt;Bananas&lt;/li&gt; <br>
+            &lt;/ul&gt;
+        </div>
+        <div class="code-box">
+            &lt;ol&gt; <br>
+            &nbsp;&nbsp;&lt;li&gt;First Item&lt;/li&gt; <br>
+            &nbsp;&nbsp;&lt;li&gt;Second Item&lt;/li&gt; <br>
+            &lt;/ol&gt;
+        </div>
+    
+        <h2>9. The <code class="highlight">&lt;div&gt;</code> Tag 🏠</h2>
+        <p><code>&lt;div&gt;</code> is an <b>invisible box</b> that helps organize content.</p>
+        <div class="code-box">
+            &lt;div&gt; <br>
+            &nbsp;&nbsp;&lt;p&gt;This is inside a div!&lt;/p&gt; <br>
+            &lt;/div&gt;
+        </div>
+
+    <h2>📺 Watch & Learn: HTML Basics</h2>
+    <iframe width="560" height="315" src="https://www.youtube.com/embed/it1rTvBcfRg" frameborder="0" allowfullscreen></iframe>
+
+    
+    <h2>🌟 Mini Mission: Build Your First HTML Page!</h2>
+    <div class="mini-mission-container">
+        <p><b>Drag and drop</b> the correct HTML elements to build a simple webpage!</p>
+
+        <div id="elements">
+            <div class="draggable" draggable="true" id="html">&lt;html&gt;</div>
+            <div class="draggable" draggable="true" id="head">&lt;head&gt;</div>
+            <div class="draggable" draggable="true" id="title">&lt;title&gt;My Page&lt;/title&gt;</div>
+            <div class="draggable" draggable="true" id="head-close">&lt;/head&gt;</div>
+            <div class="draggable" draggable="true" id="body">&lt;body&gt;</div>
+            <div class="draggable" draggable="true" id="h1">&lt;h1&gt;Welcome!&lt;/h1&gt;</div>
+            <div class="draggable" draggable="true" id="p">&lt;p&gt;This is a paragraph.&lt;/p&gt;</div>
+            <div class="draggable" draggable="true" id="body-close">&lt;/body&gt;</div>
+            <div class="draggable" draggable="true" id="html-close">&lt;/html&gt;</div>
+        </div>
+
+        <h2>Drop Here:</h2>
+        <div class="drop-zone" id="dropZone"></div>
+
+        <button class="check-answer-btn" onclick="checkOrder()">Check Answer</button>
+        <p class="message" id="message"></p>
+    </div>
+
+    <button class="quiz-btn bounce" onclick="startQuiz()">Take the Quiz 🎉</button>
+</div>
+
+<script>
+    let correctOrder = [
+        "&lt;html&gt;", "&lt;head&gt;", "&lt;title&gt;My Page&lt;/title&gt;", "&lt;/head&gt;",
+        "&lt;body&gt;", "&lt;h1&gt;Welcome!&lt;/h1&gt;", "&lt;p&gt;This is a paragraph.&lt;/p&gt;",
+        "&lt;/body&gt;", "&lt;/html&gt;"
+    ];
+
+    let draggedElement = null;
+
+    document.querySelectorAll(".draggable").forEach(item => {
+        item.addEventListener("dragstart", function (event) {
+            draggedElement = event.target;
+        });
+    });
+
+    let dropZone = document.getElementById("dropZone");
+
+    dropZone.addEventListener("dragover", function (event) {
+        event.preventDefault();
+    });
+
+    dropZone.addEventListener("drop", function (event) {
+        event.preventDefault();
+        if (draggedElement) {
+            dropZone.appendChild(draggedElement);
+            draggedElement = null;
+        }
+    });
+
+    function checkOrder() {
+        let userOrder = Array.from(dropZone.children).map(item => item.innerHTML);
+        
+        if (JSON.stringify(userOrder) === JSON.stringify(correctOrder)) {
+            document.getElementById("message").innerHTML = "🎉 Correct! You've built a webpage! 🎉";
+            document.getElementById("message").style.color = "green";
+        } else {
+            document.getElementById("message").innerHTML = "❌ Oops! Try again.";
+            document.getElementById("message").style.color = "red";
+        }
+    }
+
+    function startQuiz() {
+        window.location.href = "lesson1_quiz.html";
+    }
+</script>
+
+</body>
+</html>

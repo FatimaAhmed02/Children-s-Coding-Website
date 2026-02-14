@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lesson 2: Introduction to CSS</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Fredoka+One&display=swap');
+
+        body {
+            font-family: 'Fredoka One', sans-serif;
+            background: linear-gradient(135deg, #00c9ff, #92fe9d);
+            text-align: center;
+            padding: 20px;
+            overflow-x: hidden;
+        }
+
+        .lesson-container {
+            max-width: 850px;
+            margin: auto;
+            background: white;
+            padding: 20px;
+            border-radius: 15px;
+            box-shadow: 0px 8px 16px rgba(0, 0, 0, 0.2);
+            animation: fadeIn 1s ease-in-out;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(-30px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        h1 {
+            color: #0088cc;
+            font-size: 36px;
+        }
+
+        h2 {
+            color: #0099ff;
+        }
+
+        p {
+            font-size: 18px;
+            color: #333;
+        }
+
+        .code-box {
+            background: #f7f7f7;
+            padding: 15px;
+            border-radius: 8px;
+            font-family: "Courier New", monospace;
+            white-space: pre-wrap;
+            text-align: left;
+            margin-top: 10px;
+            border-left: 5px solid #0088cc;
+            transition: transform 0.3s ease-in-out;
+        }
+
+        .code-box:hover {
+            transform: scale(1.05);
+        }
+
+        .highlight {
+            color: #0088cc;
+            font-weight: bold;
+        }
+
+        .next-btn {
+            background: linear-gradient(135deg, #0088cc, #00b4db);
+            color: white;
+            padding: 15px 25px;
+            border: none;
+            border-radius: 12px;
+            cursor: pointer;
+            font-size: 20px;
+            margin-top: 15px;
+            transition: transform 0.3s, background 0.3s;
+            animation: bounce 1s infinite;
+        }
+
+        .next-btn:hover {
+            background: linear-gradient(135deg, #0077b3, #009acd);
+            transform: scale(1.1);
+        }
+
+        @keyframes bounce {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-10px); }
+        }
+
+        .slide-in {
+            opacity: 0;
+            transform: translateX(-30px);
+            animation: slideIn 1s ease-in-out forwards;
+        }
+
+        @keyframes slideIn {
+            from { opacity: 0; transform: translateX(-30px); }
+            to { opacity: 1; transform: translateX(0); }
+        }
+
+    </style>
+</head>
+<body>
+
+<div class="lesson-container">
+    <h1>🎨 Let's Learn CSS! 🎨</h1>
+    <p class="slide-in">CSS makes websites <b>beautiful and stylish!</b> Let's explore how to use it.</p>
+
+    <h2>1. What is CSS? 🤔</h2>
+    <p class="slide-in">CSS (Cascading Style Sheets) is used to <b>design</b> and <b>style</b> webpages!</p>
+
+    <h2>2. How Does CSS Work? ⚙️</h2>
+    <p class="slide-in">CSS tells the browser how elements <b>should look</b> (color, size, position, etc.).</p>
+
+    <h2>3. Types of CSS 🏗️</h2>
+    <p class="slide-in">There are <b>three</b> main ways to use CSS:</p>
+    <div class="code-box slide-in">
+        &lt;!-- 1. Inline CSS (inside an HTML tag) --&gt;<br>
+        &lt;p style="color: red;"&gt;I am red!&lt;/p&gt;<br><br>
+        
+        &lt;!-- 2. Internal CSS (inside &lt;style&gt; in HTML) --&gt;<br>
+        &lt;style&gt;<br>
+        &nbsp;&nbsp;p { color: blue; }<br>
+        &lt;/style&gt;<br><br>
+
+        &lt;!-- 3. External CSS (separate file) --&gt;<br>
+        &lt;link rel="stylesheet" href="style.css"&gt;
+    </div>
+
+    <h2>4. Basic CSS Syntax 🖥️</h2>
+    <div class="code-box slide-in">
+        selector { <br>
+        &nbsp;&nbsp;property: value; <br>
+        }
+    </div>
+
+    <h2>5. Changing Colors 🎨</h2>
+    <p class="slide-in">You can change the color of text using <b>color</b>.</p>
+    <div class="code-box slide-in">
+        p { color: red; }
+    </div>
+
+    <h2>6. Changing Fonts ✍️</h2>
+    <p class="slide-in">CSS can change the <b>font style</b>.</p>
+    <div class="code-box slide-in">
+        p { font-family: "Arial", sans-serif; }
+    </div>
+
+    <h2>7. Backgrounds & Borders 🌅</h2>
+    <p class="slide-in">We can add <b>background colors</b> or <b>border styles</b>.</p>
+    <div class="code-box slide-in">
+        body { background-color: lightblue; } <br>
+        p { border: 2px solid black; }
+    </div>
+
+    <h2>8. Spacing (Margin & Padding) 📏</h2>
+    <p class="slide-in">Margin = space <b>outside</b> an element. Padding = space <b>inside</b> an element.</p>
+    <div class="code-box slide-in">
+        div { margin: 10px; padding: 20px; }
+    </div>
+
+    <h2>9. Text Styling ✨</h2>
+    <p class="slide-in">We can change <b>text size, boldness, and alignment</b>.</p>
+    <div class="code-box slide-in">
+        h1 { font-size: 40px; font-weight: bold; text-align: center; }
+    </div>
+
+    <h2>10. The CSS Box Model 📦</h2>
+    <p class="slide-in">Everything in CSS is a <b>box</b> (with width, height, padding, and margin).</p>
+    <div class="code-box slide-in">
+        div { width: 200px; height: 100px; padding: 10px; border: 2px solid black; }
+    </div> 
+    <h2>📺 Watch & Learn: Introduction to CSS</h2>
+<div class="video-container">
+    <iframe width="560" height="315" src="https://www.youtube.com/embed/AGDDdsiZ0Ko" frameborder="0" allowfullscreen></iframe>
+</div>
+
+
+<button class="next-btn" onclick="location.href='lesson2_mission.html'">Next: Mini Mission 🎯</button>
+
+</div>
+
+<script>
+    // Apply slide-in effect after delay
+    document.addEventListener("DOMContentLoaded", function () {
+        setTimeout(() => {
+            document.querySelectorAll(".slide-in").forEach(element => {
+                element.style.animationDelay = "0.5s";
+                element.classList.add("fadeIn");
+            });
+        }, 500);
+    });
+</script>
+
+</body>
+</html>

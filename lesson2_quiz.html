@@ -1,0 +1,235 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lesson 2 Quiz: CSS Basics</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Fredoka+One&display=swap');
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Fredoka One', sans-serif;
+            background: linear-gradient(-45deg, #00c9ff, #92fe9d, #84fab0, #8fd3f4);
+            background-size: 400% 400%;
+            animation: gradientBG 8s ease infinite;
+            text-align: center;
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        @keyframes gradientBG {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
+        .quiz-container {
+            width: 90%;
+            max-width: 800px;
+            background: white;
+            padding: 30px;
+            border-radius: 20px;
+            box-shadow: 0px 8px 16px rgba(0, 0, 0, 0.2);
+            animation: fadeIn 1s ease-in-out;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: scale(0.9); }
+            to { opacity: 1; transform: scale(1); }
+        }
+
+        h1 {
+            color: #007bff;
+            font-size: 34px;
+            margin-bottom: 20px;
+        }
+
+        .question {
+            font-size: 22px;
+            font-weight: bold;
+            margin-bottom: 20px;
+            color: #333;
+        }
+
+        .options {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .option {
+            background: #007bff;
+            padding: 12px 20px;
+            border: none;
+            border-radius: 12px;
+            cursor: pointer;
+            font-size: 18px;
+            width: 80%;
+            max-width: 350px;
+            transition: all 0.3s ease-in-out;
+            color: white;
+            font-weight: bold;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+        }
+
+        .option:hover {
+            background: #0056b3;
+            transform: scale(1.1);
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3);
+        }
+
+        .result {
+            font-size: 24px;
+            margin-top: 20px;
+            font-weight: bold;
+            color: #444;
+        }
+
+        .cheer {
+            display: none;
+            font-size: 30px;
+            color: gold;
+            animation: bounce 1s infinite;
+        }
+
+        @keyframes bounce {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-10px); }
+        }
+
+        .next-btn {
+            display: none;
+            background-color: #007bff;
+            color: white;
+            padding: 15px 20px;
+            border: none;
+            border-radius: 12px;
+            cursor: pointer;
+            font-size: 20px;
+            transition: transform 0.2s, background 0.3s;
+            margin-top: 20px;
+            font-weight: bold;
+        }
+
+        .next-btn:hover {
+            background: #0056b3;
+            transform: scale(1.1);
+        }
+
+    </style>
+</head>
+<body>
+
+<div class="quiz-container">
+    <h1>📝 CSS Basics Quiz</h1>
+    
+    <div id="quiz">
+        <div class="question" id="question">Loading question...</div>
+        <div class="options" id="options"></div>
+    </div>
+
+    <button class="next-btn" id="nextLesson" onclick="nextLesson()">Next Lesson ➡️</button>
+
+    <div class="result" id="result"></div>
+    <div class="cheer" id="cheer">🎉 Great job! You earned the **CSS Champion** badge! 🎉</div>
+</div>
+<script>
+    const questions = [
+        { question: "What does CSS stand for?", options: ["Creative Style Sheets", "Cascading Style Sheets", "Computer Styling System"], answer: 1 },
+        { question: "Which property is used to change text color?", options: ["color", "text-color", "font-color"], answer: 0 },
+        { question: "Which CSS property controls the background color?", options: ["background", "bgcolor", "background-color"], answer: 2 },
+        { question: "What property is used to change the font of a text?", options: ["text-style", "font-family", "font-style"], answer: 1 },
+        { question: "Which value of position keeps an element fixed in place?", options: ["absolute", "relative", "fixed"], answer: 2 },
+        { question: "What unit is commonly used for font sizes?", options: ["px", "kg", "sec"], answer: 0 },
+        { question: "Which property is used to add space inside an element?", options: ["padding", "margin", "border"], answer: 0 },
+        { question: "Which property is used to add space outside an element?", options: ["margin", "padding", "spacing"], answer: 0 },
+        { question: "How do you make text bold in CSS?", options: ["text-weight: bold;", "font-weight: bold;", "bold: true;"], answer: 1 },
+        { question: "What is the default position of elements in CSS?", options: ["static", "absolute", "relative"], answer: 0 }
+    ];
+
+    let currentQuestion = 0;
+let score = 0;
+//load a qn
+function loadQuestion() {
+    document.getElementById("question").textContent = questions[currentQuestion].question;
+    const optionsContainer = document.getElementById("options");
+    optionsContainer.innerHTML = "";
+
+    questions[currentQuestion].options.forEach((option, index) => {
+        const button = document.createElement("button");
+        button.classList.add("option");
+        button.textContent = option;
+        button.onclick = () => checkAnswer(index);
+        optionsContainer.appendChild(button);
+    });
+}
+//check answer and movw to next qn
+function checkAnswer(selected) {
+    if (selected === questions[currentQuestion].answer) {
+        score++;
+    }
+    currentQuestion++;
+
+    if (currentQuestion < questions.length) {
+        loadQuestion();
+    } else {
+        showResult();
+    }
+}
+//show quiz result
+async function showResult() {
+    document.getElementById("quiz").style.display = "none";
+    const resultText = `You got ${score}/10 correct!`;
+    document.getElementById("result").textContent = resultText;
+
+    if (score >= 7) { // ✅ If the user passes (score 7 or more)
+        document.getElementById("cheer").style.display = "block";
+        document.getElementById("nextLesson").style.display = "inline-block";
+
+        // ✅ Update progress via backend API
+        await updateUserProgress(1, "CSS CHAMPION");
+    }
+}
+
+// ✅ Function to send merit points and badge to the backend
+async function updateUserProgress(earnedMerit, newBadge) {
+    let username = localStorage.getItem("username");
+    if (!username) return;
+
+    try {
+        let response = await fetch("http://localhost:5000/api/users/update-progress", {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({ username, meritPoints: earnedMerit, badge: newBadge })
+        });
+
+        let data = await response.json();
+        if (response.ok) {
+            showNotification("🎉 Progress Updated!", "success");
+        } else {
+            showNotification("⚠ Error updating progress!", "error");
+        }
+    } catch (error) {
+        console.error("Error updating progress:", error);
+    }
+}
+
+    function nextLesson() {
+        window.location.href = "lesson3.html";
+    }
+
+    loadQuestion();
+</script>
+
+
+</body>
+</html>

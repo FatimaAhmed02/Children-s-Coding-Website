@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lesson 4: Creating a Mini Profile Page</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Fredoka+One&display=swap');
+
+        body {
+            font-family: 'Fredoka One', sans-serif;
+            background: linear-gradient(135deg, #84fab0, #8fd3f4);
+            text-align: center;
+            padding: 20px;
+        }
+
+        .lesson-container {
+            max-width: 800px;
+            margin: auto;
+            background: white;
+            padding: 20px;
+            border-radius: 15px;
+            box-shadow: 0px 5px 15px rgba(0, 0, 0, 0.2);
+            animation: fadeIn 1s ease-in-out;
+        }
+
+        h1 {
+            color: #007bff;
+            font-size: 30px;
+        }
+
+        h2 {
+            color: #0056b3;
+        }
+
+        p {
+            font-size: 18px;
+            color: #444;
+        }
+
+        .code-box {
+            background: #d4eaff;
+            padding: 15px;
+            border-radius: 8px;
+            font-family: "Courier New", monospace;
+            white-space: pre-wrap;
+            text-align: left;
+            margin-top: 10px;
+            border-left: 5px solid #007bff;
+        }
+
+        .next-btn {
+            background-color: #007bff;
+            color: white;
+            padding: 15px 20px;
+            border: none;
+            border-radius: 10px;
+            cursor: pointer;
+            font-size: 20px;
+            transition: transform 0.2s, background 0.3s;
+            margin-top: 15px;
+        }
+
+        .next-btn:hover {
+            background: #0056b3;
+            transform: scale(1.1);
+        }
+
+        .bounce {
+            animation: bounce 1s infinite;
+        }
+
+        @keyframes bounce {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-10px); }
+        }
+
+        /* Drag and Drop Styles */
+        .drag-container { display: flex; flex-wrap: wrap; gap: 10px; justify-content: center; }
+        .dropzone { border: 2px dashed #007bff; padding: 20px; min-height: 200px; background: white; margin-top: 10px; text-align: center; }
+        .draggable { padding: 10px; background: #007bff; color: white; cursor: grab; display: inline-block; margin: 5px; border-radius: 5px; }
+        .preview-box { border: 2px solid #007bff; min-height: 200px; padding: 20px; margin-top: 10px; background: white; }
+        .check-btn { margin-top: 15px; padding: 10px 15px; background: #28a745; color: white; border: none; cursor: pointer; border-radius: 5px; }
+        .message { font-size: 18px; margin-top: 10px; }
+    </style>
+</head>
+<body>
+
+<div class="lesson-container">
+    <h1 class="emoji">🎨 Let's Build a Mini Profile Page! 🎨</h1>
+    <p>In this lesson, you'll learn how to create a simple and **beautiful profile page** with HTML and CSS.</p>
+
+    <h2>📺 Watch & Learn: Profile Page Tutorial</h2>
+    <iframe width="560" height="315" src="https://www.youtube.com/embed/dOdF_YlQcms?si=dfBpHI7UKtzvsWU8" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+
+    <h2>📌 Step 1: Setting Up the HTML</h2>
+    <p>Every webpage starts with **HTML**. Here's how we structure our profile page:</p>
+    <div class="code-box">
+        &lt;div class="profile"&gt;<br>
+        &nbsp;&nbsp;&lt;h1&gt;My Profile&lt;/h1&gt;<br>
+        &nbsp;&nbsp;&lt;img src="profile.jpg" alt="Profile Picture"&gt;<br>
+        &nbsp;&nbsp;&lt;button&gt;Follow Me&lt;/button&gt;<br>
+        &lt;/div&gt;
+    </div>
+
+    <h2>🎨 Step 2: Adding CSS for Styling</h2>
+    <p>Now, let's make it **beautiful** with CSS!</p>
+    <div class="code-box">
+        .profile {<br>
+        &nbsp;&nbsp;background-color: lightblue;<br>
+        &nbsp;&nbsp;text-align: center;<br>
+        &nbsp;&nbsp;border-radius: 10px;<br>
+        &nbsp;&nbsp;padding: 20px;<br>
+        }
+    </div>
+
+    <h2>🎯 Mini Mission: Build Your Profile Page!</h2>
+    <p>Drag and drop the correct **HTML and CSS** elements to build your profile page. See the **live preview** below!</p>
+
+    <!-- Drag and Drop Elements -->
+    <div class="drag-container">
+        <h3>🔹 HTML Elements</h3>
+        <div class="draggable" draggable="true" id="html1">&lt;h1&gt;My Profile&lt;/h1&gt;</div>
+        <div class="draggable" draggable="true" id="html2">&lt;img src='profile.jpg' width='100px'&gt;</div>
+        <div class="draggable" draggable="true" id="html3">&lt;button&gt;Follow Me!&lt;/button&gt;</div>
+
+        <h3>🎨 CSS Styles</h3>
+        <div class="draggable" draggable="true" id="css1">background-color: lightblue;</div>
+        <div class="draggable" draggable="true" id="css2">text-align: center;</div>
+        <div class="draggable" draggable="true" id="css3">border-radius: 10px;</div>
+        <div class="draggable" draggable="true" id="css4">padding: 10px;</div>
+    </div>
+
+    <!-- Dropzone -->
+    <div class="dropzone" id="dropzone">Drop elements here!</div>
+
+    <!-- Live Preview -->
+    <h3>👀 Live Preview:</h3>
+    <div id="livePreview" class="preview-box"></div>
+
+    <!-- Check Answer and Take Quiz Buttons -->
+    <button class="check-btn" onclick="checkAnswer()">Check Answer</button>
+    <p id="message" class="message"></p>
+    <button class="next-btn bounce" onclick="startQuiz()">Take the Quiz! 🎉</button>
+</div>
+
+<script>
+    const dropzone = document.getElementById("dropzone");
+    const livePreview = document.getElementById("livePreview");
+    const message = document.getElementById("message");
+
+    document.querySelectorAll(".draggable").forEach(item => {
+        item.addEventListener("dragstart", event => {
+            event.dataTransfer.setData("text", event.target.id);
+        });
+    });
+
+    dropzone.addEventListener("dragover", event => {
+        event.preventDefault();
+    });
+
+    dropzone.addEventListener("drop", event => {
+        event.preventDefault();
+        const data = event.dataTransfer.getData("text");
+        const element = document.getElementById(data);
+        dropzone.appendChild(element);
+        updatePreview(); // Update preview in real-time
+    });
+
+    function updatePreview() {
+        let htmlContent = "";
+        let cssContent = "";
+        
+        dropzone.querySelectorAll(".draggable").forEach(item => {
+            if (item.id.startsWith("html")) {
+                htmlContent += item.innerText + "<br>";
+            } else if (item.id.startsWith("css")) {
+                cssContent += item.innerText + " ";
+            }
+        });
+
+        livePreview.innerHTML = `<div style="${cssContent}">${htmlContent}</div>`;
+    }
+
+    function checkAnswer() {
+        message.innerHTML = "✅ Correct! You've built your profile page!";
+    }
+
+    function startQuiz() {
+        window.location.href = "lesson4_quiz.html";
+    }
+</script>
+
+</body>
+</html>

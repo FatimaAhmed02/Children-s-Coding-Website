@@ -1,0 +1,261 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lesson 2 Mini Mission - Drag & Drop CSS Styling</title>
+    <style>
+    body {
+        font-family: 'Poppins', sans-serif;
+        text-align: center;
+        background: linear-gradient(135deg, #a18cd1, #fbc2eb);
+        padding: 20px;
+        color: white;
+    }
+    
+    h1 {
+        font-size: 28px;
+    }
+    
+    /* Game Layout */
+    .game-container {
+        display: flex;
+        justify-content: center;
+        align-items: flex-start;
+        gap: 50px;
+        flex-wrap: wrap;
+    }
+    
+    /* Preview Area */
+    .preview-container {
+        border: 2px solid #fff;
+        background: white;
+        border-radius: 10px;
+        overflow: hidden;
+        width: 300px;
+        height: 300px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+    }
+    
+    .preview-frame {
+        width: 100%;
+        height: 100%;
+        border: none;
+    }
+    
+    /* Styling Drop Areas */
+    .unstyled-page {
+        background: white;
+        padding: 20px;
+        border-radius: 10px;
+        width: 300px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+        color: black;
+    }
+    
+    .drop-zone {
+        background: #ddd;
+        padding: 15px;
+        margin: 10px 0;
+        border: 2px dashed #555;
+        text-align: center;
+        cursor: pointer;
+        transition: background 0.3s ease-in-out;
+    }
+    
+    .drop-zone.active {
+        background: lightgreen;
+    }
+    
+    /* Draggable CSS Options */
+    .css-options {
+        display: flex;
+        flex-direction: column;
+        gap: 15px;
+    }
+    
+    .draggable {
+        background: orange;
+        color: white;
+        padding: 10px;
+        border-radius: 8px;
+        cursor: grab;
+        font-weight: bold;
+        box-shadow: 0 3px 5px rgba(0, 0, 0, 0.2);
+    }
+    
+    .draggable:active {
+        cursor: grabbing;
+    }
+    
+    /* Buttons */
+    .check-btn, .reset-btn, .next-btn {
+        background: green;
+        color: white;
+        padding: 10px 20px;
+        border: none;
+        border-radius: 5px;
+        font-size: 18px;
+        margin-top: 20px;
+        cursor: pointer;
+        display: block;
+        margin: 10px auto;
+    }
+    
+    .check-btn:hover {
+        background: darkgreen;
+    }
+    
+    .reset-btn {
+        background: red;
+    }
+    
+    .reset-btn:hover {
+        background: darkred;
+    }
+    
+    .next-btn {
+        background: #ff4500;
+    }
+    
+    .next-btn:hover {
+        background: #e03e00;
+    }
+    
+    .bounce {
+        animation: bounce 1s infinite;
+    }
+    
+    @keyframes bounce {
+        0%, 100% { transform: translateY(0); }
+        50% { transform: translateY(-10px); }
+    }
+    
+    #resultMessage {
+        font-size: 20px;
+        font-weight: bold;
+        margin-top: 15px;
+    }
+    </style>
+</head>
+<body>
+
+    <h1>Style This Page! 🎨</h1>
+    <p>Drag and drop the correct CSS styles onto the elements. Watch the preview change!</p>
+
+    <div class="game-container">
+        <!-- Preview -->
+        <div class="preview-container">
+            <iframe id="previewFrame" class="preview-frame"></iframe>
+        </div>
+
+        <!-- Styling Drop Area -->
+        <div class="unstyled-page">
+            <div id="bodyDrop" class="drop-zone" data-target="previewBody">Drop CSS here for <b>Body</b></div>
+            <h1 id="h1Drop" class="drop-zone" data-target="previewHeading">Drop CSS here for <b>Heading</b></h1>
+            <p id="pDrop" class="drop-zone" data-target="previewParagraph">Drop CSS here for <b>Paragraph</b></p>
+            <button id="buttonDrop" class="drop-zone" data-target="previewButton">Drop CSS here for <b>Button</b></button>
+        </div>
+
+        <!-- Draggable CSS Options -->
+        <div class="css-options">
+            <div class="draggable" draggable="true" data-style="background-color: lightblue;" id="bgColor">background-color: lightblue;</div>
+            <div class="draggable" draggable="true" data-style="color: red;" id="headingColor">color: red;</div>
+            <div class="draggable" draggable="true" data-style="font-size: 18px;" id="paragraphSize">font-size: 18px;</div>
+            <div class="draggable" draggable="true" data-style="background-color: orange;" id="buttonStyle">background-color: orange;</div>
+        </div>
+    </div>
+
+    <!-- Buttons -->
+    <button onclick="checkStyles()" class="check-btn">Check Answer</button>
+    <button onclick="resetQuiz()" class="reset-btn" style="display: none;">Try Again</button>
+    <button class="next-btn bounce" onclick="location.href='lesson2_quiz.html'">Next: Lesson 2 Quiz 📝</button>
+
+
+    <p id="resultMessage"></p>
+
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+        const draggables = document.querySelectorAll('.draggable');
+        const dropZones = document.querySelectorAll('.drop-zone');
+        const previewFrame = document.getElementById('previewFrame');
+        const resetButton = document.querySelector('.reset-btn');
+        const nextButton = document.querySelector('.next-btn');
+
+        // Load preview frame
+        function loadPreview() {
+    previewFrame.contentDocument.body.innerHTML = `
+        <style>
+            body { font-family: Arial, sans-serif; text-align: center; padding: 20px; }
+            h1 { margin-bottom: 10px; }
+            button { padding: 8px 12px; border: none; }
+        </style>
+        <h1 id="previewHeading">This is a heading</h1>
+        <p id="previewParagraph">This is a paragraph.</p>
+        <button id="previewButton">Click Me!</button>
+    `;
+}
+
+        loadPreview();
+
+        draggables.forEach(item => {
+            item.addEventListener('dragstart', function (e) {
+                e.dataTransfer.setData('text', e.target.id);
+            });
+        });
+
+        // Allow drop
+        dropZones.forEach(zone => {
+            zone.addEventListener('dragover', function (e) {
+                e.preventDefault();
+                this.classList.add('active');
+            });
+
+            zone.addEventListener('dragleave', function () {
+                this.classList.remove('active');
+            });
+
+            zone.addEventListener('drop', function (e) {
+                e.preventDefault();
+                this.classList.remove('active');
+
+                const draggedId = e.dataTransfer.getData('text');
+                const draggedElement = document.getElementById(draggedId);
+
+                if (draggedElement) {
+                    this.textContent = draggedElement.textContent;
+                    this.dataset.correct = draggedElement.id;
+                    const target = this.dataset.target;
+
+                    
+                    if (target === "previewBody") {
+                        previewFrame.contentDocument.body.style.cssText += draggedElement.dataset.style;
+                    } else {
+                        const targetElement = previewFrame.contentDocument.getElementById(target);
+                        if (targetElement) {
+                            targetElement.style.cssText += draggedElement.dataset.style;
+                        }
+                    }
+                }
+            });
+        });
+
+        //Check if styles are correctly placed
+        window.checkStyles = function () {
+            let allCorrect = [...dropZones].every(zone => zone.dataset.correct);
+            
+            if (allCorrect) {
+                document.getElementById("resultMessage").textContent = "🎉 Correct!";
+                nextButton.style.display = "block";
+            } else {
+                document.getElementById("resultMessage").textContent = "❌ Try Again!";
+                resetButton.style.display = "block";
+            }
+        };
+
+    });
+</script>
+
+
+</body>
+</html>

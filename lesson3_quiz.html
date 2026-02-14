@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lesson 3 Quiz - Buttons & Hover Effects</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Fredoka+One&display=swap');
+
+        body {
+            font-family: 'Fredoka One', sans-serif;
+            background: linear-gradient(135deg, #84fab0, #8fd3f4);
+            text-align: center;
+            padding: 20px;
+        }
+
+        .quiz-container {
+            max-width: 800px;
+            margin: auto;
+            background: white;
+            padding: 20px;
+            border-radius: 15px;
+            box-shadow: 0px 5px 15px rgba(0, 0, 0, 0.2);
+            animation: fadeIn 1s ease-in-out;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(-20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        h1 {
+            color: #ff4500;
+            font-size: 30px;
+        }
+
+        .question {
+            font-size: 20px;
+            margin: 15px 0;
+            color: #333;
+        }
+
+        .options label {
+            display: block;
+            background: #f8b400;
+            padding: 10px;
+            margin: 5px;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+
+        .options label:hover {
+            background: #e69a00;
+        }
+
+        .submit-btn, .next-btn {
+            background-color: #ff4500;
+            color: white;
+            padding: 15px 20px;
+            border: none;
+            border-radius: 10px;
+            cursor: pointer;
+            font-size: 20px;
+            transition: transform 0.2s, background 0.3s;
+            margin-top: 20px;
+        }
+
+        .submit-btn:hover, .next-btn:hover {
+            background: #e03e00;
+            transform: scale(1.1);
+        }
+
+        .result {
+            font-size: 22px;
+            font-weight: bold;
+            margin-top: 20px;
+            display: none;
+        }
+
+        .cheering {
+            display: none;
+            font-size: 40px;
+            color: #ff4500;
+            margin-top: 20px;
+            animation: bounce 1s infinite;
+        }
+
+        .badge-message {
+            font-size: 20px;
+            color: #008000;
+            font-weight: bold;
+            margin-top: 15px;
+            display: none;
+        } 
+        .bounce {
+           animation: bounce 1s infinite;
+        }
+
+        @keyframes bounce {
+        0%, 100% { transform: translateY(0); }
+        50% { transform: translateY(-10px); }
+       }
+
+        .next-btn {
+            display: none;
+        }
+    </style>
+</head>
+<body>
+
+<div class="quiz-container">
+    <h1>🎉 Lesson 3 Quiz: Buttons & Hover Effects 🎉</h1>
+    
+    <form id="quizForm">
+        <div class="question">1. What is a button used for?</div>
+        <div class="options">
+            <label><input type="radio" name="q1" value="a"> Just decoration</label>
+            <label><input type="radio" name="q1" value="b"> Clicking to do something</label>
+            <label><input type="radio" name="q1" value="c"> Making a webpage colorful</label>
+        </div>
+
+        <div class="question">2. Which CSS property changes the button's color?</div>
+        <div class="options">
+            <label><input type="radio" name="q2" value="a"> font-size</label>
+            <label><input type="radio" name="q2" value="b"> width</label>
+            <label><input type="radio" name="q2" value="c"> background-color</label>
+        </div>
+
+        <div class="question">3. What happens when you use <code>:hover</code> on a button?</div>
+        <div class="options">
+            <label><input type="radio" name="q3" value="a"> The button disappears</label>
+            <label><input type="radio" name="q3" value="b"> The button changes when the mouse is over it</label>
+            <label><input type="radio" name="q3" value="c"> The button moves to another place</label>
+        </div>
+
+        <div class="question">4. What does <code>border-radius</code> do?</div>
+        <div class="options">
+            <label><input type="radio" name="q4" value="a"> Makes the button invisible</label>
+            <label><input type="radio" name="q4" value="b"> Makes the button round</label>
+            <label><input type="radio" name="q4" value="c"> Changes the button color</label>
+        </div>
+
+        <div class="question">5. What is used to make a button bigger?</div>
+        <div class="options">
+            <label><input type="radio" name="q5" value="a"> padding</label>
+            <label><input type="radio" name="q5" value="b"> text-align</label>
+            <label><input type="radio" name="q5" value="c"> background-color</label>
+        </div>
+
+        <button type="button" class="submit-btn" onclick="checkAnswers()">Submit Answers</button>
+    </form>
+
+    <div class="result" id="quizResult"></div>
+    <div class="cheering" id="cheeringMessage">🎉 Great job! You did amazing! 🎉</div>
+    <div class="badge-message" id="badgeMessage"></div>
+    
+    <!-- Next Lesson Button (Hidden Initially) -->
+    <button class="next-btn" id="nextLesson" onclick="goToNextLesson()">Next Lesson →</button>
+</div>
+
+<script>
+    async function checkAnswers() {
+        let correctAnswers = {
+            q1: "b",
+            q2: "c",
+            q3: "b",
+            q4: "b",
+            q5: "a"
+        };
+    
+        let score = 0;
+        let totalQuestions = Object.keys(correctAnswers).length;
+    
+        for (let key in correctAnswers) {
+            let selected = document.querySelector(`input[name="${key}"]:checked`);
+            if (selected && selected.value === correctAnswers[key]) {
+                score++;
+            }
+        }
+    
+        // Show result message
+        let resultText = `You got ${score} out of ${totalQuestions} correct!`;
+        document.getElementById("quizResult").innerText = resultText;
+        document.getElementById("quizResult").style.display = "block";
+    
+        if (score === totalQuestions) {
+            document.getElementById("nextLesson").style.display = "inline-block";
+    
+            // Call backend to update merit and badge
+            await updateProgress(1, "Button Master");
+    
+            // Display success message
+            let badgeMessage = document.getElementById("badgeMessage");
+            badgeMessage.innerHTML = `🎖️ Congratulations! You earned the 'Button Master' badge!`;
+            badgeMessage.style.display = "block";
+            badgeMessage.classList.add("bounce");
+        } else {
+            document.getElementById("badgeMessage").style.display = "none";
+        }
+    }
+    
+    // update backend progress
+    async function updateProgress(meritPoints, badge) {
+        let username = localStorage.getItem("username");
+        if (!username) return;
+    
+        try {
+            let response = await fetch("http://localhost:5000/api/users/update-progress", {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify({ username, meritPoints, badge })
+            });
+    
+            let data = await response.json();
+            console.log("✅ Progress updated:", data);
+        } catch (error) {
+            console.error("❌ Error updating progress:", error);
+        }
+    }
+    
+    // ✅ Redirect to next lesson
+    function goToNextLesson() {
+        window.location.href = "lesson4.html";
+    }
+    </script>
+    
+
+</body>
+</html>
